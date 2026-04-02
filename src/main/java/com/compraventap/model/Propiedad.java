@@ -24,6 +24,6 @@ public class Propiedad {
     private int precio;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idUsuarioDueno")
     private Usuario usuario;
 }
