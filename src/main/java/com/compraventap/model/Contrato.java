@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -24,9 +25,16 @@ public class Contrato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idContrato;
 
-    //Funciones propias del contrato
-    private LocalDate fechaContrato;
-    private Double montoTotal;
+    @Column(name = "fechaInicio")
+    private LocalDate fechaInicio;
+
+    @Column(name = "fechaFinal")
+    private LocalDate fechaFinal;
+
+    @Column(name = "montoTotal")
+    private Integer montoTotal;
+
+    @Column(name = "estadoContrato")
     private String estadoContrato;
 
     @ManyToOne
@@ -34,12 +42,10 @@ public class Contrato {
     private Vendedor vendedor;
 
     @ManyToOne
-    @JoinColumn(name = "idComprador", nullable = false)
+    @JoinColumn(name = "idComprador", nullable = false) 
     private Comprador comprador;
 
     @ManyToOne
     @JoinColumn(name = "idPropiedad", nullable = false)
     private Propiedad propiedad;
-
-
 }

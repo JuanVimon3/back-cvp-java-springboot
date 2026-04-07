@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController // Indica que esta clase es un controlador REST
 @RequestMapping("/api/propiedades") // Define la ruta base para los endpoints de esta clase
+@CrossOrigin(origins = "*") // Permite solicitudes desde cualquier origen
 public class PropiedadController {
 
     @Autowired

@@ -1,5 +1,7 @@
 package com.compraventap.model; 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,15 +17,22 @@ public class Propiedad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPropiedad")
-    private int idPropiedad;
+    private Integer idPropiedad;
 
     @Column(name = "ubicacion")
     private String ubicacion;
 
     @Column(name = "precio")
-    private int precio;
+    private Integer precio;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuarioDueno")
-    private Usuario usuario;
+    @JoinColumn(name = "idVendedor", nullable = false)
+    @JsonBackReference
+    private Vendedor vendedor;
+
+    @Column(name = "titulo")
+    private String titulo;
+
+    @Column(name = "descripcion")
+    private String descripcion;
 }

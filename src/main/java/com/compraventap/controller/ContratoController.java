@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/contratos")
+@CrossOrigin(origins = "*") 
 public class ContratoController {
     
     @Autowired
@@ -28,7 +29,8 @@ public class ContratoController {
         public Contrato actualizarContrato(@PathVariable int id, @RequestBody Contrato detalleContrato) {
             return contratoRepository.findById(id)
             .map(contrato -> {
-                contrato.setFechaContrato(detalleContrato.getFechaContrato());
+                contrato.setFechaInicio(detalleContrato.getFechaInicio());
+                contrato.setFechaFinal(detalleContrato.getFechaFinal());
                 contrato.setMontoTotal(detalleContrato.getMontoTotal());
                 contrato.setEstadoContrato(detalleContrato.getEstadoContrato());
                 contrato.setVendedor(detalleContrato.getVendedor());
