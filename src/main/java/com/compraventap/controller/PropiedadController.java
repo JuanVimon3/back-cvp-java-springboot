@@ -1,5 +1,6 @@
 package com.compraventap.controller;
 
+
 import com.compraventap.model.Propiedad;
 import com.compraventap.repository.PropiedadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ public class PropiedadController {
     @GetMapping
     public List <Propiedad> listarTodas() {
         return propiedadRepository.findAll();
+    }
+
+    //Endpoint para listar propiedad por ID
+    @GetMapping("/{id}")
+    public Propiedad obtenerAdministradorPorId(@PathVariable Integer id) {
+        return propiedadRepository.findById(id).orElse(null);
     }
 
     // Endpoint para agregar una nueva propiedad

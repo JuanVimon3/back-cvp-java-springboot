@@ -22,6 +22,11 @@ public class UsuarioController {
         return usuarioRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Usuario obtenerAdministradorPorId(@PathVariable Integer id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
     @PostMapping
     public Usuario guardUsuario(@RequestBody Usuario usuario){
         return usuarioRepository.save(usuario);

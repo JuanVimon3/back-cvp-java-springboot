@@ -21,6 +21,11 @@ public class AdministradorController {
         return administradorRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Administrador obtenerAdministradorPorId(@PathVariable Integer id) {
+        return administradorRepository.findById(id).orElse(null);
+    }
+
     @PostMapping
     public Administrador guardarAdministrador(@RequestBody Administrador administrador){
         return administradorRepository.save(administrador);

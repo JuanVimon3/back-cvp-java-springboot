@@ -1,5 +1,6 @@
 package com.compraventap.controller;
 
+
 import com.compraventap.model.Contrato;
 import com.compraventap.repository.ContratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class ContratoController {
     @GetMapping
     public List<Contrato> listarTodos(){
         return contratoRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Contrato obtenerAdministradorPorId(@PathVariable Integer id) {
+        return contratoRepository.findById(id).orElse(null);
     }
 
     @PostMapping

@@ -1,5 +1,6 @@
 package com.compraventap.controller;
 
+
 import com.compraventap.model.Comprador;
 import com.compraventap.repository.CompradorRepository;
 
@@ -19,6 +20,11 @@ public class CompradorController {
     @GetMapping
     public List<Comprador> listarTodos(){
         return compradorRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Comprador obtenerAdministradorPorId(@PathVariable Integer id) {
+        return compradorRepository.findById(id).orElse(null);
     }
 
     @PostMapping

@@ -21,6 +21,11 @@ public class PagoController {
         return pagoRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Pago obtenerPagoPorId(@PathVariable Integer id) {
+        return pagoRepository.findById(id).orElse(null);
+    }
+
     @PostMapping
     public Pago guardarPago(@RequestBody Pago pago) {
         return pagoRepository.save(pago);
