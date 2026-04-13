@@ -35,4 +35,19 @@ public class Propiedad {
 
     @Column(name = "descripcion")
     private String descripcion;
+
+    @Column(name = "area")
+    private String area;
+
+    @Column(name = "bedrooms")
+    private Integer bedrooms;
+
+    @Column(name = "bathrooms")
+    private Integer bathrooms;
+
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "type")
+    private String type;
 }
