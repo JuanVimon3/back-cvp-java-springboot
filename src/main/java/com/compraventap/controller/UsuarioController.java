@@ -1,10 +1,12 @@
 package com.compraventap.controller;
 
+import com.compraventap.dto.LoginRequest;
 import com.compraventap.model.Usuario;
 import com.compraventap.repository.UsuarioRepository;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,5 +56,19 @@ public class UsuarioController {
         usuarioRepository.deleteById(id);
         return "Usuario con id: " + id + "eliminado exitosamente";
     }
+
+    // Endpoint para login de usuario
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    // Se usa el médoto findByEmail definido en UsuarioRepository
+    return usuarioRepository.findByEmail(loginRequest.getEmail())
+        .map(user -> {
+            if (user.getPassword().equals(loginRequest.getPassword())) {
+                return ResponseEntity.ok(user); // Login exitoso
+            }
+            return ResponseEntity.status(401).body("Contraseña incorrecta");
+        })
+        .orElse(ResponseEntity.status(404).body("Usuario no encontrado"));
+}
     
 }
