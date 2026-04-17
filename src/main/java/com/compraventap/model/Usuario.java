@@ -22,6 +22,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUsuario;
     private Integer cedula;
+    @Column(unique = true, nullable = false)
     private String email;
     private String nombre;
     private String password; 
