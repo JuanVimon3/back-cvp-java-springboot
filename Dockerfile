@@ -1,4 +1,4 @@
-// Dockerfile para construir la imagen de la aplicación Spring Boot
+# Dockerfile para construir la imagen de la aplicación Spring Boot
 
 FROM gradle:8.5-jdk21 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
