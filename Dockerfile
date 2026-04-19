@@ -6,7 +6,7 @@ WORKDIR /home/gradle/src
 
 RUN gradle build -x test --no-daemon
 
-FROM openjdk:21-jdk-slim
+FROM amazoncorretto:21-alpine-jdk
 EXPOSE 8080
 COPY --from=build /home/gradle/src/build/libs/*.jar app.jar
 
