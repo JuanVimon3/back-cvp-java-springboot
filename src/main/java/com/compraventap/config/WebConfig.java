@@ -10,10 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns(
-                    "http://localhost:3000",
-                    "https://*.vercel.app" // Url dinamica para permitir cualquier subdominio de vercel.app
-                )
+                .allowedOrigins("https://compra-venta-propiedades-mz51.vercel.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
