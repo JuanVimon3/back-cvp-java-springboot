@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/administradores")
-@CrossOrigin(origins = "*")
+@CrossOrigin(originPatterns = "*")
 public class AdministradorController {
     @Autowired
     private AdministradorRepository administradorRepository;
