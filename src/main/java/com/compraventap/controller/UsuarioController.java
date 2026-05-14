@@ -30,9 +30,15 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario guardUsuario(@RequestBody Usuario usuario){
-        return usuarioRepository.save(usuario);
+    public ResponseEntity<?> guardUsuario(@RequestBody Usuario usuario) {
+    try {
+        Usuario usuarioGuardado = usuarioRepository.save(usuario);
+        
+        return ResponseEntity.status(201).body(usuarioGuardado);
+    } catch (Exception e) {
+        return ResponseEntity.status(500).body("Error al guardar: " + e.getMessage());
     }
+}
 
     // Endpoint para actualizar un usuario existente
     @PutMapping("/{id}")
