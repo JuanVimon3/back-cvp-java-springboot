@@ -1,6 +1,7 @@
 package com.compraventap.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -29,6 +30,7 @@ public class Vendedor {
 
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnoreProperties("vendedor")
     private List<Propiedad> propiedades;
 
     // private String telefono;
