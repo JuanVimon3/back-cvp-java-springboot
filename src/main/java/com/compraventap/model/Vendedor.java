@@ -30,7 +30,6 @@ public class Vendedor {
 
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
     @JsonManagedReference
-    @JsonIgnoreProperties("vendedor")
     private List<Propiedad> propiedades;
 
     // private String telefono;
