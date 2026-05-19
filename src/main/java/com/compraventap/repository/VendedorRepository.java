@@ -1,4 +1,5 @@
 package com.compraventap.repository;
+import java.util.Optional;
 
 import com.compraventap.model.Vendedor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VendedorRepository extends JpaRepository<Vendedor, Integer> {
     // Se pueden generar búsquedas personalizadas más adelante
+    Optional<Vendedor> findByUsuarioIdUsuario(Integer idUsuario);
 }
