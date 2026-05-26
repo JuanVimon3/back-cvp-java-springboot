@@ -49,7 +49,7 @@ public class Propiedad {
     // @Column(name = "image")
     // private String image;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "propiedadImages", joinColumns = @JoinColumn(name = "idPropiedad"))
     @Column(name = "imageUrl")
     private List<String> images;
