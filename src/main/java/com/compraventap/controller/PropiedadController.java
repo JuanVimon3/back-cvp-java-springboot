@@ -102,7 +102,6 @@ public class PropiedadController {
                     propiedad.setArea(detallesPropiedad.getArea());
                     propiedad.setBedrooms(detallesPropiedad.getBedrooms());
                     propiedad.setBathrooms(detallesPropiedad.getBathrooms());
-                    propiedad.setImage(detallesPropiedad.getImage());
                     return propiedadRepository.save(propiedad);
                 }).orElseThrow(() -> new RuntimeException("Propiedad no encontrada con id: " + id));
     }
