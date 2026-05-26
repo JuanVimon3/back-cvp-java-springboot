@@ -46,8 +46,8 @@ public class Propiedad {
     @Column(name = "bathrooms")
     private Integer bathrooms;
 
-    @Column(name = "image")
-    private String image;
+    // @Column(name = "image")
+    // private String image;
 
     @ElementCollection
     @CollectionTable(name = "propiedadImages", joinColumns = @JoinColumn(name = "idPropiedad"))
