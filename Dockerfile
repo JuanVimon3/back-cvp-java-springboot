@@ -6,7 +6,7 @@ WORKDIR /home/gradle/src
 
 
 RUN chmod +x gradlew
-RUN ./gradlew build -x test --no-daemon --max-workers=1 --parallel=false -Dorg.gradle.jvmargs="-Xmx350m -XX:MaxMetaspaceSize=128m"
+RUN ./gradlew build -x test --no-daemon -Dorg.gradle.jvmargs="-Xmx300m -XX:MaxMetaspaceSize=100m"
 
 FROM amazoncorretto:21-alpine-jdk
 EXPOSE 8080
