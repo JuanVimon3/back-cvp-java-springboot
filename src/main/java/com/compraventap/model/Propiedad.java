@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import java.util.List;
 
 @Entity
 @Table(name = "Propiedad")
@@ -47,6 +48,11 @@ public class Propiedad {
 
     @Column(name = "image")
     private String image;
+
+    @ElementCollection
+    @CollectionTable(name = "propiedadImages", joinColumns = @JoinColumn(name = "idPropiedad"))
+    @Column(name = "imageUrl")
+    private List<String> images;
 
     @Column(name = "type")
     private String type;
