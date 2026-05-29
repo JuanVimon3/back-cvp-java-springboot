@@ -17,7 +17,13 @@ import java.util.Optional;
 
 @RestController 
 @RequestMapping("/api/propiedades") 
-@CrossOrigin(originPatterns = "*") 
+@CrossOrigin(
+    origins = {
+        "http://localhost:3000", 
+        "https://compra-venta-propiedades.vercel.app"
+    }, 
+    allowCredentials = "true"
+)
 public class PropiedadController {
 
     @Autowired

@@ -11,7 +11,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/administradores")
-@CrossOrigin(originPatterns = "*")
+@CrossOrigin(
+    origins = {
+        "http://localhost:3000", 
+        "https://compra-venta-propiedades.vercel.app"
+    }, 
+    allowCredentials = "true"
+)
 public class AdministradorController {
     @Autowired
     private AdministradorRepository administradorRepository;
