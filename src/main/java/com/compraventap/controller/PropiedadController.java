@@ -47,6 +47,18 @@ public class PropiedadController {
         return propiedadRepository.findById(id).orElse(null);
     }
 
+    //Endpoint para listar propiedades según el ID del vendedor
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<?> listarPorUsuario(@PathVariable Integer idUsuario) {
+            try {
+                List<Propiedad> propiedades = propiedadRepository.findByVendedorUsuarioIdUsuario(idUsuario);
+                return ResponseEntity.ok(propiedades);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al obtener propiedades por usuario: " + e.getMessage());
+        }
+        }
+
     // Endpoint para agregar una nueva propiedad (Manejo Automático de Vendedor)
     @PostMapping
     public ResponseEntity<?> guardaPropiedad(@RequestBody Propiedad propiedad) {
