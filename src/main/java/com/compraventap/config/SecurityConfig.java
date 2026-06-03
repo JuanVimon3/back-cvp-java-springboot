@@ -28,16 +28,15 @@ public class SecurityConfig {
         .cors(cors -> cors.configurationSource(request -> {
             var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
 
+            // Una única declaración con ambos dominios autorizados
             corsConfiguration.setAllowedOrigins(java.util.List.of(
-             "http://localhost:3000",
+                "http://localhost:3000",
                 "https://compra-venta-propiedades.vercel.app"
-            )); // Permitir localhost para desarrollo y tu dominio de Vercel en producción
+            )); 
             
-            // Asegúrate de que esta URL coincida exactamente con la de tu Vercel (sin la barra / al final)
-            corsConfiguration.setAllowedOrigins(java.util.List.of("https://compra-venta-propiedades.vercel.app"));
             corsConfiguration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
             corsConfiguration.setAllowedHeaders(java.util.List.of("*"));
-            corsConfiguration.setAllowCredentials(true); // Opcional: permite el envío de cookies/auth headers
+            corsConfiguration.setAllowCredentials(true); 
             return corsConfiguration;
         }))
 
@@ -48,7 +47,7 @@ public class SecurityConfig {
 
                .requestMatchers("/api/usuarios/login", "/api/usuarios").permitAll()
                 
-                // 2. HACER PÚBLICO EL CATÁLOGO: Permitir GET a las propiedades sin token
+               
                 .requestMatchers(HttpMethod.GET, "/api/propiedades/**").permitAll()
                 
                 // 3. Rutas protegidas: Crear, editar o borrar propiedades SÍ requiere token
