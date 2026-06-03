@@ -27,6 +27,12 @@ public class SecurityConfig {
 
         .cors(cors -> cors.configurationSource(request -> {
             var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
+
+            corsConfiguration.setAllowedOrigins(java.util.List.of(
+             "http://localhost:3000",
+                "https://compra-venta-propiedades.vercel.app"
+            )); // Permitir localhost para desarrollo y tu dominio de Vercel en producción
+            
             // Asegúrate de que esta URL coincida exactamente con la de tu Vercel (sin la barra / al final)
             corsConfiguration.setAllowedOrigins(java.util.List.of("https://compra-venta-propiedades.vercel.app"));
             corsConfiguration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
