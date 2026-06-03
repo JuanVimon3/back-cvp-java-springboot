@@ -40,7 +40,9 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/propiedades/**").authenticated()
 
                 .anyRequest().authenticated()
-            );
+            )
+
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
             http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
