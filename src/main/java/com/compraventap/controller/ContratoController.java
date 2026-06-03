@@ -10,13 +10,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/contratos")
-@CrossOrigin(
-    origins = {
-        "http://localhost:3000", 
-        "https://compra-venta-propiedades.vercel.app"
-    }, 
-    allowCredentials = "true"
-)
+// @CrossOrigin(
+//     origins = {
+//         "http://localhost:3000", 
+//         "https://compra-venta-propiedades.vercel.app"
+//     }, 
+//     allowCredentials = "true"
+// )
 public class ContratoController {
     
     @Autowired

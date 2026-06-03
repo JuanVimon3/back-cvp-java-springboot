@@ -24,6 +24,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+
+        .cors(cors -> cors.configurationSource(request -> {
+            var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
+            // Asegúrate de que esta URL coincida exactamente con la de tu Vercel (sin la barra / al final)
+            corsConfiguration.setAllowedOrigins(java.util.List.of("https://compra-venta-propiedades.vercel.app"));
+            corsConfiguration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+            corsConfiguration.setAllowedHeaders(java.util.List.of("*"));
+            corsConfiguration.setAllowCredentials(true); // Opcional: permite el envío de cookies/auth headers
+            return corsConfiguration;
+        }))
+
          .csrf(csrf -> csrf.disable())
 
          .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
