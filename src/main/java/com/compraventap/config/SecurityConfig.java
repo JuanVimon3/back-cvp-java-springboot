@@ -25,12 +25,19 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
          .csrf(csrf -> csrf.disable())
+
          .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+
+               .requestMatchers("/api/usuarios/login", "/api/usuarios").permitAll()
+                
+                // 2. HACER PÚBLICO EL CATÁLOGO: Permitir GET a las propiedades sin token
                 .requestMatchers(HttpMethod.GET, "/api/propiedades/**").permitAll()
-                .requestMatchers("/api/usuarios/login", "/api/usuarios/registrar").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/usuarios/login").permitAll()
+                
+                // 3. Rutas protegidas: Crear, editar o borrar propiedades SÍ requiere token
+                .requestMatchers(HttpMethod.POST, "/api/propiedades/**").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/api/propiedades/**").authenticated()
+                .requestMatchers(HttpMethod.DELETE, "/api/propiedades/**").authenticated()
 
                 .anyRequest().authenticated()
             );
