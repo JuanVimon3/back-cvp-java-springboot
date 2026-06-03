@@ -1,5 +1,6 @@
 package com.compraventap.controller;
 
+import com.compraventap.config.JwtUtil;
 import com.compraventap.dto.LoginRequest;
 import com.compraventap.model.Usuario;
 import com.compraventap.repository.UsuarioRepository;
@@ -10,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -24,6 +27,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @GetMapping
     public List<Usuario>listarTodos() {
@@ -76,7 +82,12 @@ public class UsuarioController {
     return usuarioRepository.findByEmail(loginRequest.getEmail())
         .map(user -> {
             if (user.getPassword().equals(loginRequest.getPassword())) {
-                return ResponseEntity.ok(user); // Login exitoso
+
+                String token = jwtUtil.generateToken(user.getEmail());
+
+                Map<String, String> response = new HashMap<>();
+                response.put("token", token);
+                return ResponseEntity.ok(response); // Login exitoso
             }
             return ResponseEntity.status(401).body("Contraseña incorrecta");
         })

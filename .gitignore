@@ -1,0 +1,9 @@
+.gradle/
+build/
+bin/
+out/
+.DS_Store
+
+# Configuración local de base de datos y credenciales
+src/main/resources/application.properties
+src/main/resources/application-local.properties
