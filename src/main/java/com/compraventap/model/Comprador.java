@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 @Entity
-@Table(name = "`Comprador`") // Usar comillas para evitar problemas con mayúsculas
+@Table(name = "comprador")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
