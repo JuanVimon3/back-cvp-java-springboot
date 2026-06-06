@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "Propiedad")
+@Table(name = "`Propiedad`") // Usar comillas para evitar problemas con mayúsculas
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

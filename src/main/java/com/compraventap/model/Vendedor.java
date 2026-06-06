@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "Vendedor")
+@Table(name = "`Vendedor`") // Usar comillas para evitar problemas con mayúsculas
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

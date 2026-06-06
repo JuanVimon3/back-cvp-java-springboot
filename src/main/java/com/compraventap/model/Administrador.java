@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Administrador")
+@Table(name = "`Administrador`") // Usar comillas para evitar problemas con mayúsculas
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

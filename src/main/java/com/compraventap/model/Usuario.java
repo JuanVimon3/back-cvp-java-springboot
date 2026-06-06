@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "`Usuario`") // Usar comillas para evitar problemas con mayúsculas
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
