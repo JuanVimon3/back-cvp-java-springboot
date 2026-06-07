@@ -17,7 +17,7 @@ public class Propiedad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idPropiedad")
+    @Column(name = "id_propiedad")
     private Integer idPropiedad;
 
     @Column(name = "ubicacion")
@@ -27,7 +27,7 @@ public class Propiedad {
     private Integer precio;
 
     @ManyToOne
-    @JoinColumn(name = "idVendedor", nullable = false)
+    @JoinColumn(name = "id_vendedor", nullable = false)
     @JsonBackReference
     private Vendedor vendedor;
 
@@ -50,8 +50,8 @@ public class Propiedad {
     // private String image;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "propiedadImages", joinColumns = @JoinColumn(name = "idPropiedad"))
-    @Column(name = "imageUrl")
+    @CollectionTable(name = "propiedad_images", joinColumns = @JoinColumn(name = "id_propiedad"))
+    @Column(name = "image_url")
     private List<String> images;
 
     @Column(name = "type")

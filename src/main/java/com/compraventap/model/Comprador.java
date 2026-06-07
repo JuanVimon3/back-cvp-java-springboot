@@ -20,7 +20,7 @@ public class Comprador {
     private Integer idComprador;
 
     @OneToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Usuario usuario;
 }

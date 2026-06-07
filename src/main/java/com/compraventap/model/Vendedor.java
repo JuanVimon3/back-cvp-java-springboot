@@ -19,10 +19,11 @@ import java.util.List;
 public class Vendedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_vendedor")
     private Integer idVendedor;
 
     @OneToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Usuario usuario;
 

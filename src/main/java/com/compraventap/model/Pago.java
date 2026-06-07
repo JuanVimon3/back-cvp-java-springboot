@@ -29,17 +29,17 @@ public class Pago {
     @Column(name = "monto")
     private Integer monto;
 
-    @Column(name = "fechaPago")
+    @Column(name = "fecha_pago")
     private LocalDate fechaPago;
 
-    @Column(name = "estadoPago")
+    @Column(name = "estado_pago")
     private String estadoPago;
 
-    @Column(name = "metodoPago")
+    @Column(name = "metodo_pago")
     private String metodoPago;
 
     @ManyToOne
-    @JoinColumn(name = "idContrato", nullable = false)
+    @JoinColumn(name = "id_contrato", nullable = false)
     private Contrato contrato;
 
 }

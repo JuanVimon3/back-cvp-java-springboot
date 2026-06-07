@@ -25,27 +25,27 @@ public class Contrato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idContrato;
 
-    @Column(name = "fechaInicio")
+    @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
 
-    @Column(name = "fechaFinal")
+    @Column(name = "fecha_final")
     private LocalDate fechaFinal;
 
-    @Column(name = "montoTotal")
+    @Column(name = "monto_total")
     private Integer montoTotal;
 
-    @Column(name = "estadoContrato")
+    @Column(name = "estado_contrato")
     private String estadoContrato;
 
     @ManyToOne
-    @JoinColumn(name = "idVendedor", nullable = false)
+    @JoinColumn(name = "id_vendedor", nullable = false)
     private Vendedor vendedor;
 
     @ManyToOne
-    @JoinColumn(name = "idComprador", nullable = false) 
+    @JoinColumn(name = "id_comprador", nullable = false)
     private Comprador comprador;
 
     @ManyToOne
-    @JoinColumn(name = "idPropiedad", nullable = false)
+    @JoinColumn(name = "id_propiedad", nullable = false)
     private Propiedad propiedad;
 }
