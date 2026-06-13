@@ -32,7 +32,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwt = null;
 
-        // El token siempre debe empezar con la palabra "Bearer "
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
             try {
@@ -42,26 +41,31 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         }
 
-        // Si encontramos el usuario y no está ya autenticado en el contexto actual de Spring
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-           UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(username);
             
-            // Validamos matemáticamente el token contra el usuario
-            if (jwtUtil.validateToken(jwt, userDetails.getUsername())) {
+            if (jwtUtil.validateToken(jwt, username)) {
+                
+                // Asignamos una autoridad por defecto en caso de que userDetails.getAuthorities() venga vacío
+                var authorities = userDetails.getAuthorities();
+                if (authorities == null || authorities.isEmpty()) {
+                    authorities = org.springframework.security.core.authority.AuthorityUtils.createAuthorityList("ROLE_USER");
+                }
 
+                // Pasamos la lista de autoridades verificada
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = 
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
                 
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 
-                // Le decimos a Spring: "Este usuario es de confianza, dale paso libre"
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            } else {
+                logger.warn("El token no pudo ser validado matemáticamente para el usuario: " + username);
             }
         }
         
-        // Continuar con la petición hacia el Controller correspondiente
         chain.doFilter(request, response);
     }
 }

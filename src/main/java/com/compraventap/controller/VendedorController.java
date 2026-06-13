@@ -2,8 +2,8 @@ package com.compraventap.controller;
 
 
 
-import com.compraventap.model.Vendedor;
-import com.compraventap.repository.VendedorRepository;
+import com.compraventap.model.relational.Vendedor;
+import com.compraventap.repository.relational.VendedorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

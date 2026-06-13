@@ -1,8 +1,9 @@
 package com.compraventap.controller;
 
 
-import com.compraventap.model.Pago;
-import com.compraventap.repository.PagoRepository;
+import com.compraventap.model.relational.Pago;
+import com.compraventap.repository.relational.PagoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

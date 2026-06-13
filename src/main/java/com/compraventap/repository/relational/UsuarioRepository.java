@@ -1,8 +1,10 @@
-package com.compraventap.repository;
+package com.compraventap.repository.relational;
 
-import com.compraventap.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.compraventap.model.relational.Usuario;
+
 import java.util.Optional;
 
 @Repository

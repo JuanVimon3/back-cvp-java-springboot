@@ -1,4 +1,4 @@
-package com.compraventap.model;
+package com.compraventap.model.relational;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;

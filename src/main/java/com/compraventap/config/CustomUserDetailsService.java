@@ -1,7 +1,8 @@
 package com.compraventap.config;
 
-import com.compraventap.model.Usuario;
-import com.compraventap.repository.UsuarioRepository;
+import com.compraventap.model.relational.Usuario;
+import com.compraventap.repository.relational.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

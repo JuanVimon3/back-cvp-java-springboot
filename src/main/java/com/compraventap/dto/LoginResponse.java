@@ -1,6 +1,6 @@
 package com.compraventap.dto;
 
-import com.compraventap.model.Usuario;
+import com.compraventap.model.relational.Usuario;
 
 public class LoginResponse {
    private String token;

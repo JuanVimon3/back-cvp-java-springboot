@@ -1,7 +1,7 @@
 package com.compraventap.controller;
 
-import com.compraventap.model.Administrador;
-import com.compraventap.repository.AdministradorRepository;
+import com.compraventap.model.relational.Administrador;
+import com.compraventap.repository.relational.AdministradorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,11 +1,11 @@
 package com.compraventap.controller;
 
-import com.compraventap.model.Propiedad;
-import com.compraventap.model.Vendedor;
-import com.compraventap.model.Usuario;
-import com.compraventap.repository.PropiedadRepository;
-import com.compraventap.repository.VendedorRepository;
-import com.compraventap.repository.UsuarioRepository; // Asegúrate de tener este repo creado
+import com.compraventap.model.relational.Propiedad;
+import com.compraventap.model.relational.Usuario;
+import com.compraventap.model.relational.Vendedor;
+import com.compraventap.repository.relational.PropiedadRepository;
+import com.compraventap.repository.relational.UsuarioRepository;
+import com.compraventap.repository.relational.VendedorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -14,53 +14,56 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-
         .cors(cors -> cors.configurationSource(request -> {
             var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
-
-            // Una única declaración con ambos dominios autorizados
             corsConfiguration.setAllowedOrigins(java.util.List.of(
                 "http://localhost:3000",
                 "https://compra-venta-propiedades.vercel.app"
             )); 
-            
             corsConfiguration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
             corsConfiguration.setAllowedHeaders(java.util.List.of("*"));
             corsConfiguration.setAllowCredentials(true); 
             return corsConfiguration;
         }))
+        .csrf(csrf -> csrf.disable())
+        
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        
+        .authorizeHttpRequests(auth -> auth
+            // Permite todas las peticiones OPTIONS (Pre-flight de CORS) para evitar bloqueos tempranos
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-         .csrf(csrf -> csrf.disable())
+            // 1. RUTAS TOTALMENTE PÚBLICAS (No requieren Token)
+            .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/usuarios/login").permitAll()
+            .requestMatchers("/error").permitAll()
+            
+            .requestMatchers(HttpMethod.GET, "/api/propiedades", "/api/propiedades/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/propiedad", "/api/propiedad/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/usuarios", "/api/usuarios/**").permitAll()
 
-         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
+            // 2. RUTAS PROTEGIDAS (Exigen Token Bearer Válido - OPCIÓN A)
+            .requestMatchers("/api/propiedades/**").authenticated() // Aplica a POST, PUT, DELETE
+            
+            // Unificamos el matcher de chats para que cubra cualquier método HTTP (GET, POST, etc.) bajo .authenticated()
+            .requestMatchers("/api/chats", "/api/chats/**").authenticated() 
+            
+            // 3. REGLA DE CIERRE
+            .anyRequest().authenticated()
+        );
 
-               .requestMatchers("/api/usuarios/login", "/api/usuarios").permitAll()
-                
-               
-                .requestMatchers(HttpMethod.GET, "/api/propiedades/**").permitAll()
-                
-                // 3. Rutas protegidas: Crear, editar o borrar propiedades SÍ requiere token
-                .requestMatchers(HttpMethod.POST, "/api/propiedades/**").authenticated()
-                .requestMatchers(HttpMethod.PUT, "/api/propiedades/**").authenticated()
-                .requestMatchers(HttpMethod.DELETE, "/api/propiedades/**").authenticated()
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
-                .anyRequest().authenticated()
-            )
-
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-            http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

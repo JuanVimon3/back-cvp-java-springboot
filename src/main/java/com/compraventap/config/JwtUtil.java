@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets; // <-- Importante para la conversión de texto a bytes
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,9 +16,12 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    // Generamos una llave segura y secreta de forma automatizada para pruebas en local
-    // RECOMENDACIÓN: En producción, esto debe venir de tus variables de entorno (.env)
-    private final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    // 1. DEFINIMOS UN TEXTO FIJO (Mínimo de 256 bits / 32 caracteres para HS256)
+    // RECOMENDACIÓN: En producción, este string debe venir de tu application.properties o variables de entorno.
+    private static final String SECRET_STRING = "mi_clave_secreta_super_segura_y_larga_para_el_proyecto_CVP_2026";
+
+    // 2. CONVERTIMOS ESE STRING EN UNA LLAVE SEGURA Y FIJA
+    private final Key SECRET_KEY = Keys.hmacShaKeyFor(SECRET_STRING.getBytes(StandardCharsets.UTF_8));
 
     // 1. EXTRAER EL USUARIO (Username/Email) DEL TOKEN
     public String extractUsername(String token) {
@@ -50,7 +54,6 @@ public class JwtUtil {
     // 4. GENERAR EL TOKEN CUANDO EL USUARIO HACE LOGIN
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        // Aquí podrías agregar roles más adelante si lo requieres: claims.put("role", "VENDEDOR");
         return createToken(claims, username);
     }
 
