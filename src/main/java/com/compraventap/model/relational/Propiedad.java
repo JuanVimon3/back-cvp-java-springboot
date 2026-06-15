@@ -1,6 +1,6 @@
 package com.compraventap.model.relational; 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -28,7 +28,7 @@ public class Propiedad {
 
     @ManyToOne
     @JoinColumn(name = "id_vendedor", nullable = false)
-    @JsonBackReference
+    @JsonIgnoreProperties({"propiedades", "hibernateLazyInitializer", "handler"})
     private Vendedor vendedor;
 
     @Column(name = "titulo")

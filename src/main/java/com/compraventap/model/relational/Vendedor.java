@@ -1,7 +1,7 @@
 package com.compraventap.model.relational;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -24,11 +24,10 @@ public class Vendedor {
 
     @OneToOne
     @JoinColumn(name = "id_usuario", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuario;
 
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Propiedad> propiedades;
 
     // private String telefono;
